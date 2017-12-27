@@ -11,7 +11,14 @@
       <form class="form-horizontal" action="{{ url('task/edit/'.$task->id)}}" method="POST">
         {{ csrf_field() }}
         <div class="modal-body">
-          <input type="text" name="name" value="{{$task->name}}">
+          <div class="form-group">
+             <label for="task-name">Title</label>
+            <input type="text" name="name" id="task-name" value="{{$task->name}}" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="descript">Description</label>
+           <textarea class="form-control" name="description" id="descript" rows="4" placeholder="..." value="{{$task->description}}"></textarea>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

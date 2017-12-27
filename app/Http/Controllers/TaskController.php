@@ -18,6 +18,7 @@ class TaskController extends Controller
     {
         //Get tasks from database
         $tasks = Task::orderBy('created_at','desc')->get();
+        // return $tasks;
         return view('tasks', compact('tasks'));
     }
 
@@ -42,6 +43,7 @@ class TaskController extends Controller
         //
         $rules = [
           'name' => 'required|max:255',
+          'description' => 'required|max:255'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -49,12 +51,13 @@ class TaskController extends Controller
         if($validator->fails()){
           return redirect('/')->withErrors($validator)->withInput();
         }else{
-          $task = new Task;
 
+          $task = new Task;
           $task->name = $request->name;
+          $task->description = $request->description;
           $task->save();
 
-          return redirect('/');
+          return redirect()->back();
         }
     }
 
@@ -90,10 +93,11 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $task = Task::findOrFail($id);
+        $task = Task::find($id);
 
         $this->validate($request, [
-          'name' => 'required',
+          'name' => 'required|max:255',
+          'description' => 'required|max:255'
         ]);
 
         $data = $request->all();
@@ -118,11 +122,11 @@ class TaskController extends Controller
         if($deleted_task->delete()) {
          # code...
          Session::flash('message', 'Task deleted!');
-         return redirect('/');
+         return redirect()->back();
        }else {
          # code...
          Session::flash('message', 'Failed to delete task!');
-         return redirect('/');
+         return redirect()->back();
        }
     }
 }
