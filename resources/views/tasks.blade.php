@@ -7,9 +7,6 @@
  <div class="alert alert-info">{{Session::get('message')}}</div>
 @endif
 
-  <a class="btn btn-primary" data-toggle="collapse" href="#center" aria-expanded="false" aria-controls="collapseExample">
-   New Task
- </a>
 @include('addTask')
 
 @if(count($tasks) > 0)
@@ -29,7 +26,7 @@
         data-target="#edit-{{ $task->id }}">Edit</a>
         </form>
 
-        <form action="{{ url('task/'.$task->id) }}" method="POST">
+        <form action="{{ url('task/{$task->id}') }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
           <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</button>

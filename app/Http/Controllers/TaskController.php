@@ -90,21 +90,31 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
-        $task = Task::find($id);
-
-        $this->validate($request, [
+        $rules = [
           'name' => 'required|max:255',
           'description' => 'required|max:255'
-        ]);
+        ];
 
-        $data = $request->all();
-        $task->fill($data)->save();
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+          return redirect('/')->withErrors($validator)->withInput();
+        }else{
+
+        $current_task = Task::find($request->id);
+
+        $current_task->name = $request->name;
+        $current_task->description = $request->description;
+
+        return $current_task;
+        $current_task->save();
 
         Session::flash('message','Task updated!');
         return redirect('/');
+      }
 
     }
 
@@ -117,16 +127,21 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
-        $deleted_task = Task::find($id);
+        $deleted_task = Task::where('id',$id)->first();
 
+        if($deleted_task != null){
         if($deleted_task->delete()) {
          # code...
          Session::flash('message', 'Task deleted!');
-         return redirect()->back();
+         return redirect('/');
        }else {
          # code...
          Session::flash('message', 'Failed to delete task!');
-         return redirect()->back();
+         return redirect('/');
        }
+     }else{
+       Session::flash('message', 'Wrong ID!');
+       return redirect('/');
+     }
     }
 }

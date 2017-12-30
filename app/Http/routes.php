@@ -19,5 +19,5 @@ use App\Controller\TaskController;
 //Show Task Dashboard
 Route::resource('/','TaskController@index');
 Route::resource('task/add', 'TaskController@store');
-Route::resource('task/edit/{id}', 'TaskController@update');
+Route::put('task/edit/{id}', 'TaskController@update');
 Route::delete('task/{id}', 'TaskController@destroy');

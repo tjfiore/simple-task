@@ -8,8 +8,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="form-horizontal" action="{{ url('task/edit/'.$task->id)}}" method="POST">
+      <form class="form-horizontal" action="{{ url('task/edit/{$task->id}') }}" method="POST">
         {{ csrf_field() }}
+        {{ method_field('PUT') }}
         <div class="modal-body">
           <div class="form-group">
              <label for="task-name">Title</label>
@@ -17,7 +18,7 @@
           </div>
           <div class="form-group">
             <label for="descript">Description</label>
-           <textarea class="form-control" name="description" id="descript" rows="4" placeholder="..." value="{{$task->description}}"></textarea>
+           <textarea class="form-control" name="description" id="descript" rows="4">{{$task->description}}</textarea>
           </div>
         </div>
         <div class="modal-footer">
