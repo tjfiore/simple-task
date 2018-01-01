@@ -3,7 +3,7 @@
 <!-- display validation errors -->
 @include('common.errors')
 
-  <div class="container collapse" id="center">
+  <div class="container collapse" id="center" style="margin-top:10px;">
       <h3>Create Task</h3>
     <!-- New Task Form -->
     <form action="{{ url('task/add') }}" method="POST" class="form-horizontal" >
@@ -26,8 +26,10 @@
 
       <!-- Add Task Button -->
       <button type="submit" class="btn btn-outline-primary">Add Task</button>
-
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#center" style="margin-left:5px;">Cancel</button>
     </form>
+
+
   </div>
 
   <br> <br> <br>
@@ -48,4 +50,5 @@
       margin: 5px 50px 5px 50px;
       padding: 10px;
     }
+
   </style>

@@ -8,7 +8,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="form-horizontal" action="{{ url('task/edit/{$task->id}') }}" method="POST">
+      <form class="form-horizontal" action="{{ url('task/edit/'.$task->id) }}" method="POST">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
         <div class="modal-body">

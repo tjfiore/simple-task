@@ -90,7 +90,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         //
         $rules = [
@@ -104,12 +104,10 @@ class TaskController extends Controller
           return redirect('/')->withErrors($validator)->withInput();
         }else{
 
-        $current_task = Task::find($request->id);
+        $current_task = Task::find($id);
 
         $current_task->name = $request->name;
         $current_task->description = $request->description;
-
-        return $current_task;
         $current_task->save();
 
         Session::flash('message','Task updated!');
@@ -127,7 +125,7 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
-        $deleted_task = Task::where('id',$id)->first();
+        $deleted_task = Task::findOrFail($id);
 
         if($deleted_task != null){
         if($deleted_task->delete()) {
