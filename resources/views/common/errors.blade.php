@@ -1,20 +1,20 @@
 @if(count($errors) > 0)
-	
-	<div class="alert alert-danger">
-		<strong>
-		Whoops! Something went wrong!
-	    </strong>
 
-	    <br> <br>
+	<center>
+		<div class="alert alert-danger" style="margin:20px 20px; width:30%; text-align:center;">
+			<strong>Whoops! Something went wrong!</strong>
 
-	    <ul>
-	    	@foreach ($errors -> all() as $error)
-	    		<li>
-	    			{{$error}}
-	    	    </li>
-	    	@endforeach
+		    <br> <br>
 
-	    </ul>
+		    <ul>
+		    	@foreach ($errors -> all() as $error)
+		    		<li>
+		    			{{$error}}
+		    	  </li>
+		    	@endforeach
+		    </ul>
 
-	</div>
+	  </div>
+  </center>
+
 @endif

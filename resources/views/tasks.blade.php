@@ -3,8 +3,11 @@
 @section('content')
 @include('headers.mainHeader')
 
+<!-- display validation errors -->
+@include('common.errors')
+
 @if(Session::has('message'))
- <div class="alert alert-info" style="margin:20px 20px;">{{Session::get('message')}}</div>
+ <center><div class="alert alert-info" style="margin:20px 20px; width:30%; text-align:center;">{{Session::get('message')}}</div></center>
 @endif
 
 @include('addTask')
@@ -40,9 +43,9 @@
   @endforeach
 
 @else
-
   <center><h2>No Task Available</h2></center>
-
 @endif
+
+
 
 @endsection

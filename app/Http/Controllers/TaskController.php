@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Http\Requests;
-use Validator, Session;
+use Validator, Session, Alert;
 
 class TaskController extends Controller
 {
@@ -112,6 +112,7 @@ class TaskController extends Controller
 
         Session::flash('message','Task updated!');
         return redirect('/');
+
       }
 
     }
@@ -125,21 +126,21 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
-        $deleted_task = Task::findOrFail($id);
+      $deleted_task = Task::findOrFail($id);
 
-        if($deleted_task != null){
-        if($deleted_task->delete()) {
-         # code...
-         Session::flash('message', 'Task deleted!');
-         return redirect('/');
-       }else {
-         # code...
-         Session::flash('message', 'Failed to delete task!');
-         return redirect('/');
-       }
-     }else{
-       Session::flash('message', 'Wrong ID!');
+      if($deleted_task != null){
+          if($deleted_task->delete()){
+           # code...
+           Session::flash('message', 'Task deleted!');
+           return redirect('/');
+          }else {
+           # code...
+           Session::flash('message', 'Failed to delete task!');
+           return redirect('/');
+          }
+      }else{
+       Session::flash('message', 'Task deletion ID error!');
        return redirect('/');
-     }
+      }
     }
 }

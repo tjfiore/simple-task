@@ -11,7 +11,7 @@
       </li>
     </ul>
   </nav>
-  <h3 class="text-muted">Welcome To <code>Task At Hand</code></h3>
+  <h3>Welcome To <code>Task At Hand</code></h3>
 </div>
 
 <style media="screen">

@@ -1,8 +1,5 @@
 @section('content')
 
-<!-- display validation errors -->
-@include('common.errors')
-
   <div class="container collapse" id="center" style="margin-top:10px;">
       <h3>Create Task</h3>
     <!-- New Task Form -->
@@ -24,9 +21,9 @@
         <!-- </div> -->
       </div>
 
+      <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#center" style="margin-left:5px;">Cancel</button>
       <!-- Add Task Button -->
-      <button type="submit" class="btn btn-outline-primary">Add Task</button>
-      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#center" style="margin-left:5px;">Cancel</button>
+      <button type="submit" class="btn btn-primary">Add Task</button>
     </form>
 
 
@@ -35,6 +32,10 @@
   <br> <br> <br>
 
   <style media="screen">
+
+  button:hover{
+     cursor: pointer;
+  }
     #descript{
       resize:none;
     }
