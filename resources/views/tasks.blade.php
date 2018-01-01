@@ -7,7 +7,14 @@
 @include('common.errors')
 
 @if(Session::has('message'))
- <center><div class="alert alert-info" style="margin:20px 20px; width:30%; text-align:center;">{{Session::get('message')}}</div></center>
+ <div class="alert alert-info alert-dismissible" role="alert">
+   <div class="container">
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+     </button>
+      {{ Session::get('message') }}
+   </div>
+ </div>
 @endif
 
 @include('addTask')

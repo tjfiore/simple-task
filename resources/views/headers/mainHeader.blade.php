@@ -7,7 +7,7 @@
        </a>
       </li>
       <li>
-        <a class="nav-link" href="#">Sign out</a>
+        <a class="nav-link disabled" href="#">Sign out</a>
       </li>
     </ul>
   </nav>
