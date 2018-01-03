@@ -33,23 +33,24 @@
 
   <style media="screen">
 
-  button:hover{
-     cursor: pointer;
-  }
     #descript{
       resize:none;
     }
     #center{
       width:30%;
       margin: 0 auto;
-      border: 2px solid #4169E1;
-      border-radius: 2px;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
     }
     h3{
       text-transform: uppercase;
       text-align: center;
       margin: 5px 50px 5px 50px;
       padding: 10px;
+    }
+    button:hover{
+       cursor: pointer;
     }
 
   </style>
