@@ -5,20 +5,42 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Http\Requests;
+use App\Repositories\TaskRepository;
 use Validator, Session, Alert;
 
 class TaskController extends Controller
 {
+  /**
+  * The task repository instance.
+  *
+  * @var TaskRepository
+  */
+ protected $tasks;
+
+  /**
+   * Create a new controller instance.
+   *
+   * @param  TaskRepository  $tasks
+   * @return void
+   */
+  public function __construct(TaskRepository $tasks)
+  {
+      $this->middleware('auth');
+
+      $this->tasks = $tasks;
+  }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //Get tasks from database
-        $tasks = Task::orderBy('created_at','desc')->get();
-        // return $tasks;
+        $tasks = $this->$tasks->forUser($request->user());
+
+       // return $tasks;
         return view('tasks', compact('tasks'));
     }
 
@@ -49,15 +71,22 @@ class TaskController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if($validator->fails()){
-          return redirect('/')->withErrors($validator)->withInput();
+          return redirect('/tasks')->withErrors($validator)->withInput();
         }else{
 
-          $task = new Task;
-          $task->name = $request->name;
-          $task->description = $request->description;
-          $task->save();
+          // $task = new Task;
+          // $task->name = $request->name;
+          // $task->description = $request->description;
+          // $task->save();
 
-          return redirect()->back();
+  #create() will automatically set the user_id property of the given task to
+  #the ID of the currently authenticated user
+          $request->user()->tasks()->create([
+            'name' => $request->name,
+            'description' => $request->description,
+          ]);
+
+          return redirect('/tasks');
         }
     }
 
@@ -101,7 +130,7 @@ class TaskController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if($validator->fails()){
-          return redirect('/')->withErrors($validator)->withInput();
+          return redirect('/tasks')->withErrors($validator)->withInput();
         }else{
 
         $current_task = Task::find($id);
@@ -111,7 +140,7 @@ class TaskController extends Controller
         $current_task->save();
 
         Session::flash('message','Task updated!');
-        return redirect('/');
+        return redirect('/tasks');
 
       }
 
@@ -132,15 +161,15 @@ class TaskController extends Controller
           if($deleted_task->delete()){
            # code...
            Session::flash('message', 'Task deleted!');
-           return redirect('/');
+           return redirect('/tasks');
           }else {
            # code...
            Session::flash('message', 'Failed to delete task!');
-           return redirect('/');
+           return redirect('/tasks');
           }
       }else{
        Session::flash('message', 'Task deletion ID error!');
-       return redirect('/');
+       return redirect('/tasks');
       }
     }
 }
