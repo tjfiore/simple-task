@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Http\Requests;
 use App\Repositories\TaskRepository;
-use Validator, Session, Alert;
+use Validator, Session;
+
 
 class TaskController extends Controller
 {
@@ -26,7 +27,6 @@ class TaskController extends Controller
   public function __construct(TaskRepository $tasks)
   {
       $this->middleware('auth');
-
       $this->tasks = $tasks;
   }
 
@@ -37,11 +37,10 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        //Get tasks from database
-        $tasks = $this->$tasks->forUser($request->user());
-
        // return $tasks;
-        return view('tasks', compact('tasks'));
+        return view('tasks.index', [
+          'tasks' => $this->tasks->forUser($request->user())
+        ]);
     }
 
     /**
@@ -73,11 +72,6 @@ class TaskController extends Controller
         if($validator->fails()){
           return redirect('/tasks')->withErrors($validator)->withInput();
         }else{
-
-          // $task = new Task;
-          // $task->name = $request->name;
-          // $task->description = $request->description;
-          // $task->save();
 
   #create() will automatically set the user_id property of the given task to
   #the ID of the currently authenticated user
@@ -152,24 +146,20 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Task $task)
     {
-        //
-      $deleted_task = Task::findOrFail($id);
+        //$deleted_task = Task::findOrFail($id);
 
-      if($deleted_task != null){
-          if($deleted_task->delete()){
-           # code...
-           Session::flash('message', 'Task deleted!');
-           return redirect('/tasks');
-          }else {
-           # code...
-           Session::flash('message', 'Failed to delete task!');
-           return redirect('/tasks');
-          }
-      }else{
-       Session::flash('message', 'Task deletion ID error!');
+      $this->authorize('destroy', $task);
+
+       if($task->delete()){
+       Session::flash('message', 'Task deleted!');
+       return redirect('/tasks');
+      }else {
+       Session::flash('message', 'Failed to delete task!');
        return redirect('/tasks');
       }
+
+
     }
 }

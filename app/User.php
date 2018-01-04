@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Task;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -30,5 +31,5 @@ class User extends Authenticatable
     public function tasks(){
       return $this->hasMany(Task::class);
     }
-  
+
 }

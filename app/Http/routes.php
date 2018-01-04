@@ -25,3 +25,6 @@ Route::delete('task/{id}', 'TaskController@destroy');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/', function(){
+  return redirect('/tasks');
+});
