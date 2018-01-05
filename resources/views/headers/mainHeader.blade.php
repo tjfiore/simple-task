@@ -1,9 +1,9 @@
 <div class="header clearfix">
-  <nav>
-    <ul class="nav nav-pills float-right">
+  <nav >
+    <ul class="nav nav-pills float-right" style="margin-top: 10px;">
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#center" aria-expanded="false" aria-controls="collapseExample">
-          <i class="fa fa-plus" aria-hidden="true"></i>  New Task
+          <i class="fa fa-btn fa-plus" aria-hidden="true"></i>  New Task
        </a>
       </li>
       <li>
@@ -11,16 +11,31 @@
       </li>
     </ul>
   </nav>
+
+  <nav >
+    <ul class="nav nav-pills float-left" style="margin-top:10px;">
+    @if(!Auth::guest())
+    <li class="nav-item"><h4> Hi, {{ Auth::user()->name }} </h4></li>
+    @else
+      <li >Hi, Guest</li>
+    @endif
+  </ul>
+  </nav>
+
   <h3>Welcome To <code>Task At Hand</code></h3>
+
 </div>
 
 <style media="screen">
   .header{
     background-color: #222;
-    height: 140px;
+    height: 130px;
     padding: 20px;
     color: white;
   }
   nav{  display: inline-block; }
-  li { margin-top: 10px; }
+
+
+  .fa-btn {    margin-right: 6px;     }
+
 </style>

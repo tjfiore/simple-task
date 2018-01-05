@@ -17,7 +17,7 @@
  </div>
 @endif
 
-@include('addTask')
+@include('tasks.addTask')
 
 @if(count($tasks) > 0)
   <center><h2 style="margin-bottom:20px">Your Tasks</h2></center>
