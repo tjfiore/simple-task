@@ -17,14 +17,18 @@ use App\Controller\TaskController;
 */
 
 //Show Task Dashboard
-Route::resource('/tasks','TaskController@index');
-Route::resource('task/add', 'TaskController@store');
-Route::put('task/edit/{id}', 'TaskController@update');
-Route::delete('task/{id}', 'TaskController@destroy');
-
-Route::auth();
-
-Route::get('/home', 'HomeController@index');
 Route::get('/', function(){
   return redirect('/tasks');
 });
+
+Route::group(['middleware'=>'auth'], function(){
+
+  Route::resource('/tasks','TaskController@index');
+  Route::resource('task/add', 'TaskController@store');
+  Route::put('task/edit/{id}', 'TaskController@update');
+  Route::delete('task/{id}', 'TaskController@destroy');
+
+});
+
+
+Route::auth();
