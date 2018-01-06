@@ -31,18 +31,28 @@
         {{$task->description}}
       </div>
 
-      <div class="modal-footer">
-        <form>
-        <a href="#" class="btn btn-primary" data-toggle="modal"
-        data-target="#edit-{{ $task->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Edit</a>
-        </form>
+        @if(Auth::check())
+         <div class="modal-footer">
+            <form>
+            <a href="#" class="btn btn-primary" data-toggle="modal"
+            data-target="#edit-{{ $task->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true" id="editBtn"></i>  Edit</a>
+            </form>
 
-        <form action="{{ url('task/'.$task->id) }}" method="POST">
-            {{ csrf_field() }}
-            {{ method_field('DELETE') }}
-          <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>  Delete</button>
-        </form>
-      </div>
+            <form action="{{ url('task/'.$task->id) }}" method="POST">
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}
+              <button type="submit" class="btn btn-danger" id="delBtn"><i class="fa fa-trash"></i>  Delete</button>
+            </form>
+          </div>
+        @else
+          <script>
+            $(function(){
+              $('#delBtn').prop('disabled',true);
+              $('#editBtn').prop('disabled', true);
+            });
+          </script>
+        @endif
+
     </div>
   </center>
 

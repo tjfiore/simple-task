@@ -7,6 +7,8 @@ use App\Models\Task;
 use App\Http\Requests;
 use App\Repositories\TaskRepository;
 use Validator, Session;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class TaskController extends Controller
@@ -148,17 +150,18 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        $task = Task::findOrFail($id);
-
+        $task = Task::find($id);
       // $this->authorize('destroy', $task);
 
-       if($task->delete()){
-       Session::flash('message', 'Task deleted!');
-       return redirect('/tasks');
-      }else {
-       Session::flash('message', 'Failed to delete task!');
-       return redirect('/tasks');
-      }
+        if($task->delete()){
+        Session::flash('message', 'Task deleted!');
+        return redirect('/tasks');
+       }else {
+        Session::flash('message', 'Failed to delete task!');
+        return redirect('/tasks');
+       }
+
+
 
 
     }

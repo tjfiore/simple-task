@@ -13,16 +13,16 @@
   </nav>
 
   <nav >
-    <ul class="nav nav-pills float-left" style="margin-top:10px;">
+    <ul class="nav nav-pills float-left" style="margin-top:15px;">
     @if(!Auth::guest())
     <li class="nav-item"><h4> Hi, {{ Auth::user()->name }} </h4></li>
     @else
-      <li >Hi, Guest</li>
+      <li>Hi, Guest</li>
     @endif
   </ul>
   </nav>
 
-  <h3>Welcome To <code>Task At Hand</code></h3>
+  <h3>Welcome To Task At Hand</h3>
 
 </div>
 
