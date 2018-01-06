@@ -10,19 +10,19 @@ class TaskPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+    // /**
+    //  * Create a new policy instance.
+    //  *
+    //  * @return void
+    //  */
+    // public function __construct()
+    // {
+    //     //
+    // }
 
-    public function destroy(User $user, Task $task)
+    public function destroy(User $user, Request $request)
     {
       # code...
-      return $user->id === $task->user_id;
+      return $user->id === $request->tasks()->user_id;
     }
 }

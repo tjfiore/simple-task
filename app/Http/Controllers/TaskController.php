@@ -146,11 +146,11 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Task $task)
+    public function destroy($id)
     {
-        //$deleted_task = Task::findOrFail($id);
+        $task = Task::findOrFail($id);
 
-      $this->authorize('destroy', $task);
+      // $this->authorize('destroy', $task);
 
        if($task->delete()){
        Session::flash('message', 'Task deleted!');
