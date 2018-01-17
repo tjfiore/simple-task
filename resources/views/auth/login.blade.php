@@ -4,8 +4,10 @@
 
   <div class="container">
     <div class="card card-container">
-      <center><h4>Task At Hand</h4></center>
-      <br><br>
+      <center>
+        <h5><em> Task At Hand</em></h5>
+      </center>
+      <br>
       <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="profile pic" /> -->
       <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"alt="profile pic" />
       <p id="profile-name" class="profile-name-card"></p>
@@ -40,8 +42,12 @@
 
         <button  type="submit" class="btn btn-lg btn-primary btn-block btn-signin"><i class="fa fa-btn fa-sign-in"></i>Log In</button>
       </form><!-- /form -->
-
-      <a href="{{ url('/register') }}" class="btn btn-lg btn-primary btn-block btn-signin" style="padding-top:5px;"><i class="fa fa-btn fa-user"></i>Sign Up</a>
+      <p>Don't Have an Account?
+        <a href="{{ url('/register') }}" class="forgot-password">
+          <!-- <i class="fa fa-btn fa-user"></i> -->
+          Sign Up
+        </a>
+      </p>
 
       <a href="{{ url('/password/reset') }}" class="forgot-password">Forgot the password?</a>
     </div><!-- /card-container -->
